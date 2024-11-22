@@ -1,7 +1,23 @@
-FROM node:18-alpine as production
+# Use an official Node.js runtime as a parent image
+FROM node:18-alpine
+
+# Set the working directory inside the container
 WORKDIR /app
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/package*.json ./
-RUN npm install --production
-EXPOSE 4173
+
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application files to the working directory
+COPY . .
+
+# Build the application for production
+RUN npm run build
+
+# Expose the port on which the app runs
+EXPOSE 3000
+
+# Command to start the application
 CMD ["npm", "run", "dev"]
