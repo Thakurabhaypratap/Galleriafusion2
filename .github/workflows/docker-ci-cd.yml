@@ -73,5 +73,5 @@ jobs:
           docker stop backend frontend || true
           docker rm backend frontend || true
           docker network create mern-network || true
-          docker run -d --name backend --network mern-network -e  -e MONGODB_URI=${{ secrets.MONGODB_URI }} -p 5000:5000 abhaypratapsingh7704866570/backend:${{ github.sha }}
-          docker run -d --name frontend --network mern-network -e  -p 80:80 abhaypratapsingh7704866570/frontend:${{ github.sha }}
+          docker run -d --name backend --network mern-network -e  -e MONGODB_URI=${{ secrets.MONGODB_URI }} -p 3000:3000 abhaypratapsingh7704866570/backend:${{ github.sha }}
+          docker run -d --name frontend --network mern-network -e  -p 4173:4173 abhaypratapsingh7704866570/frontend:${{ github.sha }}
